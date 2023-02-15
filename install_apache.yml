@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: "Update repository index"
+    dnf:
+      update_cache: yes
+
+  - name: "Install Apache"
+    dnf:
+      name: httpd
+      state: latest
