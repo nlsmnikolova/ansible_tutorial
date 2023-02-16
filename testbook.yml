@@ -2,9 +2,10 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
   - name: "Install updates for CentOS"
+    tags: always
     dnf:
       update_only: yes
       update_cache: yes
@@ -12,6 +13,7 @@
 
 
   - name: "Install updates for Ubuntu"
+    tags: always
     apt: 
       update_only: yes
       update_cache: yes
@@ -24,6 +26,7 @@
 
 
   - name: "Install Apache and PHP for Ubuntu"
+    tags: apache,apache2,ubuntu
     apt: 
       name:
         - apache2
@@ -33,6 +36,7 @@
 
 
   - name: "Install Apache and PHP for Centos"
+    tags: apache,httpd,centos
     dnf:
       name:
         - httpd
