@@ -1,0 +1,21 @@
+---
+
+- hosts: workstations
+  become: true
+  tasks:
+
+  - name: "Change email address for admin"
+    tags: apache,centos,httpd
+    lineinfile: 
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin didney@worlocalhost
+    when: ansible_distribution == "CentOS"
+    register: httpd
+
+  - name: "restart httpd (Centos)"
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed 
