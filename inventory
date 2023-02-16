@@ -1,2 +1,5 @@
 [web_servers]
+192.168.1.17
+
+[workstations]
 192.168.1.17 
