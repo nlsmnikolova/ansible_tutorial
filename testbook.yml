@@ -4,18 +4,18 @@
   become: true
   tasks:
 
-  - name: "install updates"
+  - name: "Install updates for CentOS"
     dnf:
       update_only: yes
       update_cache: yes
     when: ansible_distribution == "CentOS"
 
 
-  - name: "install updates"
+  - name: "Install updates for Ubuntu"
     apt: 
       update_only: yes
       update_cache: yes
-    when: ansible_distrubution == "Ubuntu"     
+    when: ansible_distribution == "Ubuntu"     
 
 
 - hosts: web_servers
