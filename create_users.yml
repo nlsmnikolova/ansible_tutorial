@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+    - name: "create user" 
+      tags: always
+      user:
+        name: didney
+        groups: root
+
+    - name: "add ssh key for user"
+      tags: always
+      authorized_key: 
+        user: didney
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFPpfdm9Vn1TguUVzbbRLj/nqXfX6kaYemObUYafcV6N ansible"
+
+    - name: add sudoers file for user
+      copy: 
+        src: sudoers_didney
+        dest: /etc/sudoers.d/didney
+        owner: root
+        group: root
+        mode: 0440
